@@ -11,7 +11,9 @@ exports.userRegister = async (req, res) =>  {
         let newUser = new User(req.body);
 
         newUser.password = await bcrypt.hash(newUser.password, saltRounds);
-
+        if(!newUser.role){
+            newUser.role = 1;
+        }
         let user = await newUser.save();
         res.status(201).json({ message: `Utilisateur créé: ${user.email}` });
     } catch (error) {
@@ -34,6 +36,7 @@ exports.userLogin = async (req, res) => {
             const userData = {
             id: user._id,
             email: user.email,
+            role: user.role
             };
         const token = await jwt.sign(userData, process.env.JWT_KEY, { expiresIn: "10h"});
         res.status(200).json({token});
@@ -46,4 +49,33 @@ exports.userLogin = async (req, res) => {
     }
 
 };
+
+exports.userDelete = async (req, res) =>{
+
+    try {
+        await User.findByIdAndDelete(req.params.user_id);
+        res.status(200).json({message: 'Utilisateur supprimé'});
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: "Une erreur s'est produite lors du traitement"});
+    }
+}
+
+exports.userPut = async (req, res) =>{
+    try {
+
+        if (req.body.password) {
+            req.body.password = await bcrypt.hash(req.body.password, saltRounds);
+        }
+
+        const user = await User.findByIdAndUpdate(req.params.user_id, req.body, { new: true });
+
+        res.status(201).json({ message: `Utilisateur modifié: ${user.email}` });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message: "Une erreur s'est produite lors du traitement"});
+    }
+}
 

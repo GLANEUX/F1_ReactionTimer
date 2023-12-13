@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 const jwtKey = process.env.JWT_KEY;
-
 require('dotenv').config();
 
 exports.verifyToken = async (req, res, next) => {

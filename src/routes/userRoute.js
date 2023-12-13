@@ -5,16 +5,17 @@ const userController = require('../controllers/userController');
 const jwtMiddleware = require('../middlewares/jwtMiddleware')
 
 
-// /user/register
+// /users/register
 router
     .route('/register')
     .post(userController.userRegister)
 
-// /user/login
+// /users/login
 router
     .route('/login')
     .post(userController.userLogin)
  
+// /users/:user_id
 router
     .route('/:user_id')
     .delete(jwtMiddleware.verifyToken, userController.userDelete)

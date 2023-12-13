@@ -12,7 +12,7 @@ exports.NewTimer = async (req, res) =>{
             return;
         }
 
-        const newTimer = new Timer({...req.body, userId: req.params.user_id});
+        const newTimer = new Timer({...req.body, user_id: req.params.user_id});
     
         try {
             const timer = await newTimer.save();
@@ -27,27 +27,3 @@ exports.NewTimer = async (req, res) =>{
     }
    
 }
-
-// exports.createAVote = async (req, res) => {
-//     try {
-//         const musique = await Musique.findById(req.params.id_musique);
-
-//         if (!musique) {
-//             res.status(404).json({ message: 'Musique introuvable' });
-//             return;
-//         }
-
-//         const newVote = new Vote({ ...req.body, musique_id: req.params.id_musique });
-
-//         try {
-//             const vote = await newVote.save();
-//             res.status(201).json(vote);
-//         } catch (error) {
-//             console.log(error);
-//             res.status(500).json({ message: 'Erreur serveur (db)(createAVote)' });
-//         }
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).json({ message: 'Erreur serveur (musique_id not exist)(createAVote)' });
-//     }
-// }

@@ -8,8 +8,7 @@ const jwtMiddleware = require('../middlewares/jwtMiddleware')
 // /:user_id/timer
 router
     .route('/:user_id/timer')
-    // .post(jwtMiddleware.verifyToken, timerController.NewTimer)
-    .post(timerController.NewTimer)
+    .post(jwtMiddleware.verifyToken, timerController.NewTimer)
 
 
 module.exports = router;

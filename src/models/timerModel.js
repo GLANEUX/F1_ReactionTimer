@@ -1,16 +1,18 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let timerSchema = new Schema({
+
+let timerSchema = new Schema ({
     timer: {
         type: Number,
-        required: true,
+        required: true
     },
-    userId: {
+    user_id: {
         type: String,
-        required: true,
+        // require: true
     }
-}); 
+});
+
 
 module.exports = mongoose.model('Timer', timerSchema);
 

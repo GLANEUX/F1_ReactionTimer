@@ -5,16 +5,16 @@ const Schema = mongoose.Schema;
 let userSchema = new Schema ({
     email: {
         type: String,
-        required: "L'email est requis",
+        required: true,
         unique: true
     },
     password: {
         type : String,
-        required: true
+        required: "Le contenu est requis"
     },
     role: {
         type : Boolean,
-        required: "Le rôle est requis"
+        required: "Le contenu est requis"
     }
 });
 

@@ -4,7 +4,7 @@
 ## :bar_chart: Models
 
 ### Users :busts_in_silhouette:
-* `email`: required, unique (Checkout if it's a real e-mail)
+* `email`: required, unique (Checkout if it's a real e-mail POST)
 * `password`: required
 * `role`:  boolean (0=admin, 1=user)
 
@@ -14,7 +14,7 @@
 
 ### :vertical_traffic_light: Routes 
 * `/users/user_id`: PROTECTED (DELETE, PUT PROTECTED by token of the user)
-* `/users/register`: return user email only (POST)
+* `/users/register`: return user email only (POST) 
 * `/users/login`: return auth token (POST)
 * `/:user_id/timer`: PROTECTED route to store user time (POST)
 * `/:user_id/timer`: PROTECTED route to get all user time (GET)

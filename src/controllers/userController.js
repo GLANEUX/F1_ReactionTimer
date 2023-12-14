@@ -5,6 +5,7 @@ require('dotenv').config();
 const saltRounds = 10;
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,}$/;
 
+
 exports.userRegister = async (req, res) =>  {
     try {
         let newUser = new User(req.body);
@@ -95,7 +96,7 @@ exports.userPut = async (req, res) =>{
             req.body.password = await bcrypt.hash(req.body.password, saltRounds);
         }
 
-        let user = await User.findByIdAndUpdate(req.params.user_id, req.body, { new: true });
+        let user = await User.findByIdAndUpdate(req.params.user_id, req.body, {new: true});
 
         res.status(201).json({ message: `Utilisateur modifié: ${user.email}` });
 

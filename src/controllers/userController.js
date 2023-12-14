@@ -3,18 +3,28 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 const saltRounds = 10;
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{5,}$/;
 
 exports.userRegister = async (req, res) =>  {
     try {
         let newUser = new User(req.body);
 
-        newUser.password = await bcrypt.hash(newUser.password, saltRounds);
+        let passwordUser = newUser.password;
+
+
+        if (!passwordRegex.test(passwordUser)) {
+            res.status(401).json({
+                message: "Le mot de passe doit faire au moin 5 caractère et contenir au moins une majuscule, une minuscule, un chiffre, et un caractère spécial."
+            });
+            return;
+        }
 
         if(!newUser.role){
             newUser.role = 1;
-        }
-
+        }  
         
+        
+        newUser.password = await bcrypt.hash(newUser.password, saltRounds);
         let user = await newUser.save();
         res.status(201).json({ message: `Utilisateur créé: ${user.email}` });
     } catch (error) {
@@ -75,11 +85,17 @@ exports.userDelete = async (req, res) =>{
 exports.userPut = async (req, res) =>{
     try {
 
-        if (req.body.password) {
+        if(req.body.password){
+            if (!passwordRegex.test(req.body.password)) {
+                res.status(401).json({
+                    message: "Le mot de passe doit faire au moin 5 caractère et contenir au moins une majuscule, une minuscule, un chiffre, et un caractère spécial."
+                });
+                return;
+            }
             req.body.password = await bcrypt.hash(req.body.password, saltRounds);
         }
 
-        const user = await User.findByIdAndUpdate(req.params.user_id, req.body, { new: true });
+        let user = await User.findByIdAndUpdate(req.params.user_id, req.body, { new: true });
 
         res.status(201).json({ message: `Utilisateur modifié: ${user.email}` });
 

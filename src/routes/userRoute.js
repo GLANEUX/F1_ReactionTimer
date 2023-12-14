@@ -19,7 +19,7 @@ router
 router
     .route('/:user_id')
     .delete(jwtMiddleware.verifyToken, userController.userDelete)
-    .put(jwtMiddleware.verifyToken, userController.userPut)
+    .put(jwtMiddleware.verifyToken, jwtMiddleware.verifyUserToken, userController.userPut)
 
 module.exports = router;
 

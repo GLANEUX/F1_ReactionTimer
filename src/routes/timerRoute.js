@@ -9,7 +9,12 @@ const jwtMiddleware = require('../middlewares/jwtMiddleware')
 router
     .route('/:user_id/timer')
     .post(jwtMiddleware.verifyToken, timerController.NewTimer)
+    .get(jwtMiddleware.verifyToken, timerController.listTimer)
 
+// /:user_id/timer/avg
+router
+    .route('/:user_id/timer/avg')
+    .get(jwtMiddleware.verifyToken, timerController.avgTime)
 
 module.exports = router;
 

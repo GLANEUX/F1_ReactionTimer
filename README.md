@@ -1,24 +1,26 @@
-# F1_ReactionTimer
+# :racing_car: F1_ReactionTimer
 
 
-## Models :
+## :bar_chart: Models :
 
-### Users
-- email: required, unique
-- password: required
-- role:  boolean (0=admin, 1=user)
+### Users :busts_in_silhouette:
+* `email`: required, unique
+* `password`: required
+* `role`:  boolean (0=admin, 1=user)
 
-### Timer
-- user_id: foreign key of document id of the user
-- time: required in ms
+### Timer :stopwatch:
+* `user_id`: foreign key of document id of the user
+* `time`: required in ms
 
-### Routes
-- /users/user_id: protected (PUT, PATCH, DELETE)
-- /users/register: return user email only (POST)
-- /users/login: return auth token (POST)
-- /:user_id/timer: PROTECTED route to store user time (POST)
+### :vertical_traffic_light: Routes 
+* `/users/user_id`: protected (PUT, PATCH, DELETE)
+* `/users/register`: return user email only (POST)
+* `/users/login`: return auth token (POST)
+* `/:user_id/timer`: PROTECTED route to store user time (POST)
+* `/:user_id/timer`: PROTECTED route to get all user time (GET)
+* `/:user_id/timer/avg`: PROTECTED route to return average user time (GET)
 
-### Obligations
-- GithubFlow
-- .env
-- hash for password 
+### :clipboard: Obligations
+* :arrows_counterclockwise:	 GithubFlow
+* :key: `.env` for environment variables
+* :lock: hash for password  security

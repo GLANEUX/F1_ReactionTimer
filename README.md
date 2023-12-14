@@ -1,10 +1,10 @@
 # :racing_car: F1_ReactionTimer
 
 
-## :bar_chart: Models :
+## :bar_chart: Models
 
 ### Users :busts_in_silhouette:
-* `email`: required, unique
+* `email`: required, unique (Checkout if it's a real e-mail POST)
 * `password`: required
 * `role`:  boolean (0=admin, 1=user)
 
@@ -13,8 +13,8 @@
 * `time`: required in ms
 
 ### :vertical_traffic_light: Routes 
-* `/users/user_id`: protected (PUT, PATCH, DELETE)
-* `/users/register`: return user email only (POST)
+* `/users/user_id`: PROTECTED (DELETE, PUT PROTECTED by token of the user)
+* `/users/register`: return user email only (POST) 
 * `/users/login`: return auth token (POST)
 * `/:user_id/timer`: PROTECTED route to store user time (POST)
 * `/:user_id/timer`: PROTECTED route to get all user time (GET)
@@ -23,4 +23,4 @@
 ### :clipboard: Obligations
 * :arrows_counterclockwise:	 GithubFlow
 * :key: `.env` for environment variables
-* :lock: hash for password  security
+* :lock: hash for password  security & secure password

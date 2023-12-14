@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const Email = require('mongoose-type-email');
 
 let userSchema = new Schema ({
     email: {
-        type: String,
+        type: Email,
+        correctTld: true,
         required: true,
         unique: true
     },

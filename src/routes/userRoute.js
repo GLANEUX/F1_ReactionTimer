@@ -18,8 +18,8 @@ router
 // /users/:user_id
 router
     .route('/:user_id')
-    .delete(jwtMiddleware.verifyToken, userController.userDelete)
-    .put(jwtMiddleware.verifyToken, userController.userPut)
+    .delete(jwtMiddleware.verifyToken, jwtMiddleware.verifyUserToken, userController.userDelete)
+    .put(jwtMiddleware.verifyToken, jwtMiddleware.verifyUserToken, userController.userPut)
 
 module.exports = router;
 

@@ -9,9 +9,12 @@ exports.userRegister = async (req, res) =>  {
         let newUser = new User(req.body);
 
         newUser.password = await bcrypt.hash(newUser.password, saltRounds);
+
         if(!newUser.role){
             newUser.role = 1;
         }
+
+        
         let user = await newUser.save();
         res.status(201).json({ message: `Utilisateur créé: ${user.email}` });
     } catch (error) {
@@ -19,6 +22,15 @@ exports.userRegister = async (req, res) =>  {
         res.status(401).json({ message: "Requête invalide" });
     }
 }
+
+
+
+
+
+
+
+
+
 
 exports.userLogin = async (req, res) => {
     try {
